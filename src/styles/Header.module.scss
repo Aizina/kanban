@@ -1,0 +1,70 @@
+.headerWrap {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #0067A3;
+    font-size: 18px;
+    width: 100%;
+    margin: 0;
+    h1{
+        font-size: 1.5em;
+        color:#fff;
+        font-weight: normal;
+        line-height: 120%;
+    }
+
+    .userWrap {
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        .profileWrap {
+            position: absolute;
+            top: 100%;
+            right: 5px;
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
+            border-radius: 5px;
+            padding: 10px 20px 10px 5px; 
+            display: flex;
+            flex-direction: column;
+            width: max-content;
+            gap: 5px;
+
+            button {
+                background-color: transparent;
+                text-align: left;
+                border: none;
+            }
+        }
+
+        .userAvatar {
+            width: 1.5em;
+            background-color: #fff;
+            border-radius: 50%;
+        }
+
+        .arrowDownButton {
+            width: 2.5em;
+            background-color: transparent;
+            border: 0;
+
+            .arrowDown {
+                transition: transform 0.3s ease;
+                width: 100%;
+
+                &.rotated {
+                    transform: rotate(180deg);
+                }
+
+                &.default {
+                    transform: rotate(0deg);
+                }
+            }
+        }
+
+
+    }
+}

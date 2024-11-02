@@ -1,0 +1,18 @@
+.footerWrap {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #0067A3;
+    font-size: 18px;
+    .descriptions {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
+        color:#fff;
+        font-weight: normal;
+        line-height: 120%;
+    }
+}
