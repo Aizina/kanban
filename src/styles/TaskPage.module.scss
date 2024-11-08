@@ -1,0 +1,55 @@
+.taskWrapper {
+    width: 100%;
+    height: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: #FFFFFF;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 18px;
+
+    @media screen and (max-width: 1000px) {
+      font-size: 16px;
+    }
+
+    @media screen and (max-width: 500px) {
+        font-size: 14px;
+    }
+    
+    .taskIntro {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+
+      .closeButton {
+        color: #000000;
+        font-size: 1.5em;
+        text-decoration: none;
+      }
+    }
+  
+    .taskDescription {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+  
+    .taskInputWrapper {    
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      
+      .taskInput {
+        flex: 1;
+        box-sizing: border-box; 
+        border: 0;
+        text-align: start;
+        font-size: 1em;
+      }   
+    }
+  }
+  

@@ -1,4 +1,4 @@
-// src/store.ts
+
 import { configureStore } from '@reduxjs/toolkit';
 import taskSlice from './taskSlice'; 
 import userSlice from './userSlice';

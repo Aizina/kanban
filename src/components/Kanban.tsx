@@ -1,26 +1,23 @@
-// src/components/Ready.tsx
-import React, { useState} from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useState, useCallback } from 'react';
+import { useAppDispatch } from '../store/hooks';
 import { Link } from 'react-router-dom';
 import { moveTask } from '../store/taskSlice';
 import { TasksProps } from '../store/interfaces';
 import style from '../styles/Kanban.module.scss';
 
-
 export const Kanban: React.FC<TasksProps> = ({status, tasksToAdd, tasksAdded}) => {
+  const dispatch = useAppDispatch();
+  const [isAdding, setIsAdding] = useState(false);
+  const [showDropDown, setShowDropDown] = useState(false);
 
-  const dispatch = useDispatch();
-  const [addButton, setAddButton]  = useState(true);
-  const [showDropDown, setshowDropDown] = useState(false);
-  
-  const handleAdd = (id: number) => {
+  const handleAdd = useCallback((id: number) => {
     dispatch(moveTask(id));
-    setAddButton(true);
-  };
+    setIsAdding(false);
+  }, [dispatch]);
 
-  const toggleDropDownList = () => {
-    setshowDropDown(!showDropDown);
-  }
+  const toggleDropDownList = useCallback(() => {
+    setShowDropDown(prev => !prev);
+  }, []);
 
   return (
     <div className={style.kanbansWrap}>
@@ -32,27 +29,29 @@ export const Kanban: React.FC<TasksProps> = ({status, tasksToAdd, tasksAdded}) =
           </li>
         ))}
       </ul>
-      { addButton ? 
-        <button onClick={() => setAddButton(false)} className={style.addCardButton}>+Add card</button> 
-        :       
+
+      {isAdding ? (
         <div className={style.dropDownList}>
-          <div className={style.selectedOption} onClick={toggleDropDownList}>Select Task </div>
-          {showDropDown && 
+          <div onClick={toggleDropDownList} className={style.arrowIconWrap}>
+            <img src="/down-arrow.png" className={style.arrowIcon} alt="Arrow Down"/>
+          </div>
+          {showDropDown && (
             <ul className={style.optionsList}>
-              <li className={style.optionItem} onClick={toggleDropDownList}></li>
-            {tasksToAdd.map((task) => (
-              <li
-                key={task.id}
-                className={style.optionItem}
-                onClick={() => handleAdd(task.id)}
-              >
-                {task.name}
-              </li>
-            ))}
-          </ul>
-          }
+              {tasksToAdd.map((task) => (
+                <li
+                  key={task.id}
+                  className={style.optionItem}
+                  onClick={() => handleAdd(task.id)}
+                >
+                  {task.name}
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
-      }
+      ) : (
+        <button onClick={() => setIsAdding(true)} className={style.addCardButton}>+ Add card</button>
+      )}
     </div>
   );
 };

@@ -1,5 +1,3 @@
-// src/store/UserSlice.ts
-
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import { fetchUserData } from './mockUserData';
 import { User, UserState, UserStatus } from './interfaces';

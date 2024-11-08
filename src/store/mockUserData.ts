@@ -8,7 +8,6 @@ import { User } from "./interfaces";
     year: new Date().getFullYear(),
   };
   
-
   export const fetchUserData = (): Promise<User> => {
     return new Promise((resolve) => {
       setTimeout(() => {

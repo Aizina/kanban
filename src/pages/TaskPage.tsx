@@ -1,68 +1,57 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '../store/store';
+import React, { useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import { useAppSelector, useAppDispatch } from '../store/hooks';
 import { changeDescription } from '../store/taskSlice'; 
+import style from '../styles/TaskPage.module.scss';
 
-
-export const TaskPage = () => {
+export const TaskPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const dispatch = useDispatch();
-  
-  const task = useSelector((state: RootState) =>
-    state.tasks.tasks.find((task) => task.id === parseInt(id || '0'))
-  );
-  
-  const [description, setDescription] = useState('');
-  const [isEditing, setIsEditing] = useState(false); 
+  const dispatch = useAppDispatch();
 
-  useEffect(() => {
-    if (task) {
-      setDescription(task.description);
-    }
-  }, [task]);
+  const taskId = Number(id);
+  const task = useAppSelector((state) => state.tasks.tasks.find((task) => task.id === taskId));
+
+  const [description, setDescription] = useState(task?.description || '');
+  const [isEditing, setIsEditing] = useState(false);
 
   if (!task) {
     return <div>Task not found</div>;
   }
 
-  const handleDescriptionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleDescriptionChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setDescription(e.target.value);
   };
 
   const handleSaveClick = () => {
-    if (description.trim() !== '') {
-      dispatch(changeDescription({ id: task.id, description })); 
+    if (description.trim() && description.trim() !== task.description) {
+      dispatch(changeDescription({ id: task.id, description }));
     }
-    setIsEditing(false); 
+    setIsEditing(false);
   };
 
- 
   const handleEditClick = () => {
-    setIsEditing(true); 
+    setIsEditing(true);
   };
 
   return (
-    <div>
-      <h2>{task.name}</h2>
-      <p>Status: {task.status}</p>
-      <div>
-        <p>Description:</p>
+    <div className={style.taskWrapper}>
+      <div className={style.taskIntro}>
+        <h2 className={style.taskName}>{task.name}</h2>
+        <Link to="/" className={style.closeButton} onClick={handleSaveClick}>&#10005;</Link>
+      </div>
+
+      <div className={style.taskDescription}>
         {isEditing ? (
-          <div>
-            <input
-              type="text"
-              value={description} 
-              onChange={handleDescriptionChange} 
+          <div className={style.taskInputWrapper}>
+            <textarea
+              value={description}
+              onChange={handleDescriptionChange}
               autoFocus
-              style={{ width: '100%', padding: '5px', fontSize: '16px' }}
+              className={style.taskInput}
             />
-            <button onClick={handleSaveClick} style={{ marginTop: '10px' }}>
-              Save
-            </button>
           </div>
         ) : (
-          <p onClick={handleEditClick} style={{ cursor: 'pointer', padding: '5px', border: '1px solid #ccc' }}>
+          <p onClick={handleEditClick}>
             {description || 'This task has no description'}
           </p>
         )}

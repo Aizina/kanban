@@ -1,4 +1,4 @@
-.headerWrap {
+.mainWrap {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -7,6 +7,17 @@
     font-size: 18px;
     width: 100%;
     margin: 0;
+    height: 55px;
+    padding: 0 3vw;
+    color:#fff;
+
+    @media screen and (max-width: 1000px) {
+        font-size: 16px;
+    }
+    @media screen and (max-width: 500px) {
+        font-size: 12px;
+    }
+
     h1{
         font-size: 1.5em;
         color:#fff;
@@ -22,21 +33,32 @@
 
         .profileWrap {
             position: absolute;
-            top: 100%;
+            z-index: 10;
+            top: 35px;
             right: 5px;
             background-color: #fff;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
             border-radius: 5px;
-            padding: 10px 20px 10px 5px; 
             display: flex;
             flex-direction: column;
             width: max-content;
             gap: 5px;
+            min-width: 40px;
 
-            button {
+            .profileButtons {
                 background-color: transparent;
                 text-align: left;
                 border: none;
+                font-size: 1em ;
+                cursor: pointer;
+                width: 140px;
+                padding: 10px 0 10px 7px;
+                border-radius: 5px;
+
+                &:hover{
+                    background-color: #DEDEDE;
+                    
+                }
             }
         }
 
@@ -66,5 +88,24 @@
         }
 
 
+    }
+
+    .descriptions {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
+        color:#fff;
+        font-weight: normal;
+        line-height: 120%;
+        font-size: 1em;
+
+        @media screen and (max-width: 500px) {
+            flex-direction: column;
+            gap: 10px;
+            align-items: flex-start;
+            word-wrap: break-word;
+        }
     }
 }

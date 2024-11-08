@@ -41,3 +41,9 @@ export enum UserStatus {
     status: UserStatus;
   }
   
+ export interface GroupedTasks {
+    backlog: Task[];
+    ready: Task[];
+    inProgress: Task[];
+    finished: Task[];
+  }

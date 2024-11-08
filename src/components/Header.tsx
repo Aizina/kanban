@@ -1,5 +1,5 @@
 import { useState } from "react";
-import style from '../styles/Header.module.scss';
+import style from '../styles/HeaderFooter.module.scss';
 
 export const Header = () => {
     const [showProfile, setShowProfile] = useState(false);
@@ -9,7 +9,7 @@ export const Header = () => {
     };
 
     return (
-        <div className={style.headerWrap}>
+        <div className={style.mainWrap}>
             <h1>Awesome Kanban Board</h1>
             <div className={style.userWrap}>
                 <img src="/user-avatar.png" className={style.userAvatar} alt="User Avatar" />
@@ -22,8 +22,8 @@ export const Header = () => {
                 </button>
                 {showProfile && (
                     <div className={style.profileWrap}>
-                        <button> Profile </button>
-                        <button> Log Out </button>
+                        <button className={style.profileButtons}> Profile </button>
+                        <button className={style.profileButtons}> Log Out </button>
                     </div>
                 )}
             </div>

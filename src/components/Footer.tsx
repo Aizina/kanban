@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState, AppDispatch  } from '../store/store';
 import { getUserData } from '../store/userSlice';
-import style from '../styles/Footer.module.scss'
+import style from '../styles/HeaderFooter.module.scss'
 
 export const Footer: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -24,7 +24,7 @@ export const Footer: React.FC = () => {
   }, [tasks]);
 
   return (
-    <div className={style.footerWrap}>
+    <div className={style.mainWrap}>
       <div className={style.descriptions}>
         <p>Active tasks: {active}</p>
         <p>Finished tasks: {finished}</p>
