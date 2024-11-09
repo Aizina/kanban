@@ -20,6 +20,12 @@ export const Backlog: React.FC<TasksState> = ( {tasks}) => {
     }
   };
 
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      handleAddTask();
+    }
+  };
+
   return (
     <div className={style.kanbansWrap}>
       <p>Backlog</p>
@@ -38,6 +44,7 @@ export const Backlog: React.FC<TasksState> = ( {tasks}) => {
             type="text"
             value={newTask}
             onChange={(e) => setNewTask(e.target.value)}
+            onKeyDown={handleKeyDown} 
             placeholder="Enter task name"
             className={style.addTaskInput}
           />
